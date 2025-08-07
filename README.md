@@ -1,6 +1,7 @@
 # UGAS - Unity Gameplay Ability System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Full Documentation](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A flexible and extensible Gameplay Ability System for Unity, inspired by Unreal Engine's GAS. This framework is designed to provide a solid foundation for managing abilities, attributes, and gameplay effects in any Unity project.
 

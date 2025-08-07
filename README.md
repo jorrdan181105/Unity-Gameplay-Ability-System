@@ -1,6 +1,6 @@
 
 <p align="center">
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki">wiki</a> |
+ | <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki">wiki</a> |
 </p>
 
 # UGAS - Unity Gameplay Ability System

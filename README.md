@@ -1,11 +1,6 @@
 
 <p align="center">
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki/Getting-Started">Getting Started</a> |
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki/Attributes">Attributes</a> | 
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki/Gameplay-Effects">Gameplay Effects</a> |
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki/Abilities">Abilities</a> |
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki/Tags">Tags</a> |
-  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki/Editor-Guide">Editor Guide</a>
+  <a href="https://github.com/sajad0131/Unity-Gameplay-Ability-System/wiki">wiki</a> |
 </p>
 
 # UGAS - Unity Gameplay Ability System

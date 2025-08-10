@@ -33,6 +33,11 @@ namespace UnityGAS
             }
         }
 
+        public void RemoveAllTags()
+        {
+            activeTags.Clear();
+        }
+
         public bool HasTag(GameplayTag tag)
         {
             return activeTags.Contains(tag);

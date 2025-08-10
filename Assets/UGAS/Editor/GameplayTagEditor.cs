@@ -48,6 +48,8 @@ namespace UnityGAS
 
             EditorGUILayout.Space();
 
+
+
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
             foreach (var node in rootNodes)
             {
@@ -58,6 +60,18 @@ namespace UnityGAS
             EditorGUILayout.Space();
 
             EditorGUILayout.LabelField("Add New Tag", EditorStyles.boldLabel);
+
+
+            // Show the currently selected parent and add a "Deselect" button.
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.LabelField("Parent:", selectedNode != null ? selectedNode.FullPath : "None (Will create a new root tag)");
+            if (GUILayout.Button("Deselect", GUILayout.Width(120)))
+            {
+                selectedNode = null;
+            }
+            EditorGUILayout.EndHorizontal();
+
+
             newTagName = EditorGUILayout.TextField("New Tag Name", newTagName);
 
             if (GUILayout.Button("Add Tag"))

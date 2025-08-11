@@ -79,6 +79,13 @@ namespace UnityGAS
             EditorGUILayout.PropertyField(serializedObject.FindProperty("requiredTags"), true);
             EditorGUILayout.PropertyField(serializedObject.FindProperty("blockedByTags"), true);
 
+            EditorGUILayout.Space();
+
+            EditorGUILayout.LabelField("Target Tags", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("targetRequiredTags"), true);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("targetBlockedByTags"), true);
+            
+
             serializedObject.ApplyModifiedProperties();
         }
     }

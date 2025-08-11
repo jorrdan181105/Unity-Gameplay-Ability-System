@@ -61,6 +61,13 @@ namespace UnityGAS
         public List<GameplayTag> requiredTags = new List<GameplayTag>();
         public List<GameplayTag> blockedByTags = new List<GameplayTag>();
 
+
+        [Header("Target Tags")]
+        public List<GameplayTag> targetRequiredTags = new List<GameplayTag>();
+        public List<GameplayTag> targetBlockedByTags = new List<GameplayTag>();
+
+
+
         public bool IsInstant => castTime <= 0f;
         public bool HasCost => cost > 0f && costAttribute != null;
 
@@ -94,11 +101,15 @@ namespace UnityGAS
                 if (!tags.HasAllTags(requiredTags)) return false;
             }
 
+            
+
             return true;
         }
 
         public bool IsValidTarget(GameObject caster, GameObject target)
         {
+            var targetTags = target?.GetComponent<TagSystem>();
+
             switch (targetingType)
             {
                 case TargetingType.Self:
@@ -108,7 +119,12 @@ namespace UnityGAS
                     if (target == null) return false;
                     if (((1 << target.layer) & targetableLayers) == 0) return false;
 
-                    // << MODIFIED: Conditional range and occlusion check
+                    if (targetTags != null)
+                    {
+                        if (targetTags.HasAnyTag(targetBlockedByTags)) return false;
+                        if (targetRequiredTags.Count > 0 && !targetTags.HasAllTags(targetRequiredTags)) return false;
+                    }
+
                     if (useRangeCheck)
                     {
                         if (Vector3.Distance(caster.transform.position, target.transform.position) > range) return false;
@@ -119,6 +135,12 @@ namespace UnityGAS
 
                 case TargetingType.Area:
                 case TargetingType.Ground:
+                    if (target == null) return false;
+                    if (targetTags != null)
+                    {
+                        if (targetTags.HasAnyTag(targetBlockedByTags)) return false;
+                        if (targetRequiredTags.Count > 0 && !targetTags.HasAllTags(targetRequiredTags)) return false;
+                    }
                     return true;
 
                 default:

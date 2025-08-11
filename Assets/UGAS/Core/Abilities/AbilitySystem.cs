@@ -49,7 +49,7 @@ namespace UnityGAS
 
         public bool TryActivateAbility(AbilityDefinition ability, GameObject target = null)
         {
-            Debug.Log("TryActivateAbility called for: " + ability.abilityName);
+            Debug.Log("TryActivateAbility called for: " + ability.abilityName + " " + target.name);
 
             if (ability == null || isCasting || IsOnCooldown(ability) || !ability.CanActivate(gameObject, target))
             {
@@ -144,17 +144,16 @@ namespace UnityGAS
                     targets.Add(gameObject);
                     break;
                 case TargetingType.Target:
+                    // The initial CanActivate check is sufficient for a single target.
                     if (target != null) targets.Add(target);
                     break;
                 case TargetingType.Area:
                 case TargetingType.Ground:
                     var center = target != null ? target.transform.position : transform.position;
-
-                    
                     if (ability.dimension == Dimension.d2D)
                     {
-                        var colliders2D = Physics2D.OverlapCircleAll(center, ability.radius, ability.targetableLayers);
-                        foreach (var col in colliders2D)
+                        var colliders = Physics2D.OverlapCircleAll(center, ability.radius, ability.targetableLayers);
+                        foreach (var col in colliders)
                         {
                             if (ability.IsValidTarget(gameObject, col.gameObject))
                             {
@@ -162,11 +161,14 @@ namespace UnityGAS
                             }
                         }
                     }
-                    else 
+                    else // Original 3D logic
                     {
-                        var colliders3D = Physics.OverlapSphere(center, ability.radius, ability.targetableLayers);
-                        foreach (var col in colliders3D)
+                        var colliders = Physics.OverlapSphere(center, ability.radius, ability.targetableLayers);
+                        foreach (var col in colliders)
                         {
+                            // --- THIS IS THE CRUCIAL FIX ---
+                            // We must validate that EACH target in the sphere is a valid target.
+                            // This will check for required tags on every single one.
                             if (ability.IsValidTarget(gameObject, col.gameObject))
                             {
                                 targets.Add(col.gameObject);
